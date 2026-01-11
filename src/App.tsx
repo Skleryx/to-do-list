@@ -76,6 +76,7 @@ export default function App() {
       bg-slate-900/80 backdrop-blur
       rounded-2xl p-6
       shadow-xl border border-blue-900 dark:border-blue-700 
+      dark:bg-slate-800/80
       ">
 
        <h1 className="
@@ -85,6 +86,7 @@ export default function App() {
           text-blue-400
           text-center
           mb-4
+          dark:text-blue-300
         ">
           To Do List
         </h1>
@@ -100,7 +102,8 @@ export default function App() {
           bg-slate-900
           p-3 sm:p-4
           rounded-xl
-          shadow-lg "
+          shadow-lg 
+          dark:bg-slate-800"
         >
           <input
             className="flex-1
@@ -111,7 +114,8 @@ export default function App() {
             py-2 sm:py-3
             text-sm sm:text-base
             outline-none
-            focus:ring-2 focus:ring-blue-500"
+            focus:ring-2 focus:ring-blue-500
+            dark:bg-slate-700"
             value={input}
             onChange={(e) => setInput(e.target.value)}
             placeholder="Tambah todo..."
@@ -124,7 +128,8 @@ export default function App() {
             text-white
             px-4 sm:px-5
             rounded-lg
-            text-lg"
+            text-lg
+            dark:bg-blue-500 dark:hover:bg-blue-600"
           >
             +
           </button>
@@ -142,7 +147,8 @@ export default function App() {
               gap-3
               bg-slate-800
               p-3 sm:p-4
-              rounded-lg"
+              rounded-lg
+              dark:bg-slate-700"
             >
               <input
                 type="checkbox"
