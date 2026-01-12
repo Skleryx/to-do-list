@@ -3,6 +3,7 @@ import LandingPage from "./pages/LandingPage";
 import TodoPage from "./pages/TodoPage";
 import ProfilePage from "./pages/ProfilePage";
 
+
 export type Page = "landing" | "todo" | "profile";
 
 export default function App() {

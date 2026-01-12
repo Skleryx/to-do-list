@@ -64,7 +64,7 @@ export function TodoApp({ onBack }: { onBack: () => void }) {
 
   return (
     <div className="
-    min-h-full bg-gradient-to-br from-slate-950 to-blue-950 min-w-full
+          min-h-screen bg-gradient-to-br from-slate-950 to-blue-950 min-w-full
     flex justify-center
     items-start sm:items-center
     pt-10 sm:pt-0 rounded-lg
