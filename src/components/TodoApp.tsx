@@ -70,10 +70,10 @@ export function TodoApp({ onBack }: { onBack: () => void }) {
     pt-10 sm:pt-0 rounded-lg
     px-4
     transition-all duration-300 dark:bg-gradient-to-br dark:from-slate-900 dark:to-blue-900
+    mx-auto w-full max-w-md
     ">
       <div className="
-        w-full
-      max-w-md sm:max-w-lg lg:max-w-xl min-h-[400px]
+      w-full mx-auto max-w-md sm:max-w-lg md:max-w-xl min-h-[400px]
       bg-slate-900/80 backdrop-blur
       rounded-2xl p-6
       shadow-xl border border-blue-900 dark:border-blue-700 
