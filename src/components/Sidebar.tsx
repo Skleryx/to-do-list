@@ -1,0 +1,36 @@
+import type { Page } from "../App";
+
+export default function Sidebar({
+  navigate,
+}: {
+  navigate: (page: Page) => void;
+}) {
+  return (
+    <aside className="w-64 bg-slate-900 text-white p-6 hidden md:flex flex-col shrink-0">
+      <h2 className="text-xl font-bold text-blue-400 mb-6">
+        Menu
+      </h2>
+
+      <button
+        onClick={() => navigate("todo")}
+        className="text-left mb-3 hover:text-blue-400"
+      >
+        📝 Todo
+      </button>
+
+      <button
+        onClick={() => navigate("profile")}
+        className="text-left mb-3 hover:text-blue-400"
+      >
+        👤 Profile
+      </button>
+
+      <button
+        onClick={() => navigate("landing")}
+        className="mt-auto text-slate-400 hover:text-white"
+      >
+        ← Kembali
+      </button>
+    </aside>
+  );
+}
