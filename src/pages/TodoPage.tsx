@@ -1,26 +1,57 @@
-import Sidebar from "../components/Sidebar";
-import { TodoApp } from "../components/TodoApp";
+import { useEffect, useState } from "react";
+import MainLayout from "../components/layout/MainLayout";
+import TodoInput from "../components/Todo/TodoInput";
+import TodoList from "../components/Todo/TodoList";
 
-export default function TodoPage({
-  onNavigate,
-}: {
-  onNavigate: (page: "landing" | "todo" | "profile") => void;
-}) {
+export default function TodoPage() {
+  const [input, setInput] = useState("");
+  const [todos, setTodos] = useState<any[]>([]);
+
+  useEffect(() => {
+    const saved = localStorage.getItem("todos");
+    if (saved) setTodos(JSON.parse(saved));
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("todos", JSON.stringify(todos));
+  }, [todos]);
+
+  const handleAdd = () => {
+    if (!input.trim()) return;
+    setTodos([...todos, { text: input, done: false }]);
+    setInput("");
+  };
+
   return (
-    <div className="min-h-[100dvh] w-full md:flex bg-gradient-to-br from-slate-950 to-blue-950 h-screen overflow-hidden">
-      <Sidebar navigate={onNavigate} />
+    <MainLayout>
+      {/* CENTER */}
+      <div className="flex h-full w-full items-center justify-center p-4">
+        {/* CARD */}
+        <div className="w-full max-w-md h-full sm:h-auto bg-slate-800 rounded-xl shadow-lg flex flex-col overflow-hidden">
+          
+          {/* HEADER */}
+          <div className="p-4 border-b border-slate-700">
+            <h1 className="text-xl font-semibold text-center text-white">
+              To Do List
+            </h1>
+          </div>
 
-      <main className="flex-1
-  flex
-  justify-center
-  items-start
-  sm:items-center
-  px-4
-  py-6
-  pb-24
-  h-screen">
-        <TodoApp onBack={() => onNavigate("landing")} />
-      </main>
-    </div>
+          {/* INPUT */}
+          <div className="p-4">
+            <TodoInput
+              value={input}
+              onChange={setInput}
+              onAdd={handleAdd}
+            />
+          </div>
+
+          {/* LIST (SCROLL DI SINI) */}
+          <div className="flex-1 overflow-y-auto px-4 pb-4">
+            <TodoList todos={todos} setTodos={setTodos} />
+          </div>
+
+        </div>
+      </div>
+    </MainLayout>
   );
 }

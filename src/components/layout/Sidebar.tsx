@@ -1,4 +1,4 @@
-import type { Page } from "../App";
+import type { Page } from "../../App";
 
 export default function Sidebar({
   navigate,
