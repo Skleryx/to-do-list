@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 
 
 interface Todo {
@@ -11,7 +13,7 @@ interface Todo {
 
 export function TodoApp({ onBack }: { onBack: () => void }) {
   const [input, setInput] = useState("");
-
+ 
   const [todos, setTodos] = useState<Todo[]>(() => {
     try {
       const saved = localStorage.getItem("todos")
@@ -68,7 +70,7 @@ export function TodoApp({ onBack }: { onBack: () => void }) {
     bg-gradient-to-br from-slate-950 to-blue-950
     px-4">
       <div className="
-      flex min-h-[100dvh] items-center justify-center
+      flex min-h-[100dvh] items-center justify-center md:min-h-lg
       ">
         <div className="
                 w-full
@@ -80,6 +82,7 @@ export function TodoApp({ onBack }: { onBack: () => void }) {
         p-6
         shadow-xl
         border border-blue-900
+        h-[80vh]
         ">
          <h1 className="
             text-xl
@@ -135,7 +138,7 @@ export function TodoApp({ onBack }: { onBack: () => void }) {
             </button>
           </form>
           {/* list */}
-          <ul className="space-y-2 sm:space-y-3 mt-4">
+          <ul className="space-y-2 sm:space-y-3 mt-4 h-[55vh] overflow-y-auto pr-1 relative">
             {todos.map(todo => (
               <div
                 key={todo.id}
@@ -172,7 +175,7 @@ export function TodoApp({ onBack }: { onBack: () => void }) {
             ))}
           </ul>
           {todos.length === 0 && (
-            <p className="mt-16 text-center text-slate-500 text-sm">
+            <p className="absolute bottom-48 left-0 right-0 text-center text-slate-500 text-sm">
               Belum ada tugas ✨
             </p>
           )}
@@ -193,16 +196,16 @@ export function TodoApp({ onBack }: { onBack: () => void }) {
           <button
             onClick={onBack}
             className="
-              mt-6 w-80
-              bg-slate-800 hover:bg-slate-700
-              text-white
-              py-3 rounded-xl
+              absolute top-4 left-4
+              bg-blue-600/20 dark:bg-blue-500/20
+              text-blue-400
+              px-3 py-1 rounded-lg
+              backdrop-blur
+              hover:bg-blue-500/30
               transition
-              dark:bg-slate-700 dark:hover:bg-slate-600
-              absolute bottom-6 left-1/2 transform -translate-x-1/2
             "
           >
-            Kembali
+            <FontAwesomeIcon icon={faArrowLeft} />
           </button>
         </div>
       </div>

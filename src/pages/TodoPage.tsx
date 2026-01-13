@@ -7,7 +7,7 @@ export default function TodoPage({
   onNavigate: (page: "landing" | "todo" | "profile") => void;
 }) {
   return (
-    <div className="min-h-[100dvh] w-full md:flex overflow-x-hidden bg-gradient-to-br from-slate-950 to-blue-950">
+    <div className="min-h-[100dvh] w-full md:flex bg-gradient-to-br from-slate-950 to-blue-950 h-screen overflow-hidden">
       <Sidebar navigate={onNavigate} />
 
       <main className="flex-1
@@ -17,7 +17,8 @@ export default function TodoPage({
   sm:items-center
   px-4
   py-6
-  pb-24">
+  pb-24
+  h-screen">
         <TodoApp onBack={() => onNavigate("landing")} />
       </main>
     </div>
