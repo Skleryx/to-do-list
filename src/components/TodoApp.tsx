@@ -101,7 +101,7 @@ export function TodoApp({ onBack }: { onBack: () => void }) {
               e.preventDefault()
               addTodo()
             }}
-            className="flex
+            className="flex flex-row
             gap-2 sm:gap-3
             bg-slate-900
             p-3 sm:p-4
