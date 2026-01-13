@@ -138,7 +138,7 @@ export function TodoApp({ onBack }: { onBack: () => void }) {
             </button>
           </form>
           {/* list */}
-          <ul className="space-y-2 sm:space-y-3 mt-4 h-[55vh] overflow-y-auto pr-1 relative">
+          <ul className="space-y-2 sm:space-y-3 mt-4 h-[55vh] overflow-y-auto pr-1 relative todo-scroll">
             {todos.map(todo => (
               <div
                 key={todo.id}
