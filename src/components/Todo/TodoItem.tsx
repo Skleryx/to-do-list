@@ -10,8 +10,8 @@ export default function TodoItem({
   onRemove,
 }: {
   todo: Todo;
-  onToggle: () => void;
-  onRemove: () => void;
+  onToggle: (id: number) => void;
+  onRemove: (id: number) => void;
 }) {
   return (
     <div className="flex
@@ -21,7 +21,11 @@ export default function TodoItem({
                 p-3 sm:p-4
                 rounded-lg
                 dark:bg-slate-700">
-      <input type="checkbox" checked={todo.completed} onChange={onToggle} className="w-5 h-5 sm:w-6 sm:h-6 accent-blue-500" />
+      <input 
+      type="checkbox" 
+      checked={todo.completed} 
+      onChange={() => onToggle(todo.id)}
+      className="w-5 h-5 sm:w-6 sm:h-6 accent-blue-500" />
       <span
         className={`flex-1 ${
           todo.completed ? "line-through text-slate-400" : "text-white"
@@ -29,7 +33,9 @@ export default function TodoItem({
       >
         {todo.text}
       </span>
-      <button onClick={onRemove} className="text-red-400 hover:text-red-500">
+      <button 
+      onClick={() => onRemove(todo.id)} 
+      className="text-red-400 hover:text-red-500">
         ✕
       </button>
     </div>
