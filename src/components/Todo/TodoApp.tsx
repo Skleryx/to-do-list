@@ -38,11 +38,15 @@ export function TodoApp() {
   }, [dark])
 
 
-const addTodo = (text: string) => { 
-  if (!text.trim()) return; // Cek teks yang dikirim dari input
+const addTodo = (text: string) => {
+  if (!text.trim()) return;
   setTodos([
     ...todos,
-    { id: Date.now().toString(), text: text, completed: false },
+    { 
+      id: Date.now().toString(), // Pastikan string agar tidak error
+      text: text, 
+      completed: false 
+    },
   ]);
 };
 
@@ -57,6 +61,17 @@ const addTodo = (text: string) => {
   const removeTodo = (id: string) => {
     setTodos(todos.filter((t) => t.id !== id));
   };
+
+type FilterType = "all" | "active" | "completed";
+const [filter, setFilter] = useState<FilterType>("all");
+
+const filteredTodos = todos.filter((todo) => {
+  if (filter === "active") return !todo.completed; // Perbandingan sekarang valid
+  if (filter === "completed") return todo.completed;
+  return true;
+});
+
+
 
   return (
     <div className="    min-h-[100dvh]
@@ -77,6 +92,10 @@ const addTodo = (text: string) => {
         shadow-xl
         border border-blue-900
         h-[80vh]
+        overflow-hidden
+        relative
+        dark:bg-slate-800/80
+        dark:border-slate-700
         ">
          <h1 className="
             text-xl
@@ -91,9 +110,45 @@ const addTodo = (text: string) => {
           </h1>
           {/* input */}
           <TodoInput onAdd={addTodo} />
+          {/* filter */}
+          <div className="flex gap-2 my-4">
+            <button
+              onClick={() => setFilter("all")}
+              className={`px-3 py-1 rounded-lg text-sm ${
+                filter === "all"
+                  ? "bg-blue-600 text-white"
+                  : "bg-slate-800 text-slate-400"
+              }`}
+            >
+              All
+            </button>
+
+            <button
+              onClick={() => setFilter("active")}
+              className={`px-3 py-1 rounded-lg text-sm ${
+                filter === "active"
+                  ? "bg-blue-600 text-white"
+                  : "bg-slate-800 text-slate-400"
+              }`}
+            >
+              Active
+            </button>
+
+            <button
+              onClick={() => setFilter("completed")}
+              className={`px-3 py-1 rounded-lg text-sm ${
+                filter === "completed"
+                  ? "bg-blue-600 text-white"
+                  : "bg-slate-800 text-slate-400"
+              }`}
+            >
+              Completed
+            </button>
+          </div>
+
           {/* list */}
           <TodoList 
-          todos={todos} 
+          todos={filteredTodos} 
           onToggle={toggleTodo} 
           onRemove={removeTodo} />
 
