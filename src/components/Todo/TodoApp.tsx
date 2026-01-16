@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
+import { useNavigate } from "react-router";
 
 
 interface Todo {
@@ -11,7 +12,9 @@ interface Todo {
 
 
 
-export function TodoApp({ onBack }: { onBack: () => void }) {
+export function TodoApp() {
+  const navigate = useNavigate();
+
   const [input, setInput] = useState("");
  
   const [todos, setTodos] = useState<Todo[]>(() => {
@@ -194,7 +197,7 @@ export function TodoApp({ onBack }: { onBack: () => void }) {
             {dark ? "☀️" : "🌙"}
           </button>
           <button
-            onClick={onBack}
+            onClick={() => navigate("/")}
             className="
               absolute top-4 left-4
               bg-blue-600/20 dark:bg-blue-500/20
@@ -212,3 +215,5 @@ export function TodoApp({ onBack }: { onBack: () => void }) {
     </div>
   );
 }
+
+export default TodoApp;

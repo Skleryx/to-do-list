@@ -1,9 +1,14 @@
+import { Routes, Route } from "react-router-dom";
 import LandingPage from "./pages/LandingPage";
-
-export type Page = "landing" | "todo" | "profile";
+import TodoPage from "./pages/TodoPage";
+import ProfilePage from "./pages/ProfilePage";
 
 export default function App() {
-  return <LandingPage navigate={function (page: Page): void {
-    console.log("Navigating to:", page);
-  } } />;
+  return (
+    <Routes>
+      <Route path="/" element={<LandingPage />} />
+      <Route path="/todo" element={<TodoPage />} />
+      <Route path="/profile" element={<ProfilePage />} />
+    </Routes>
+  );
 }
