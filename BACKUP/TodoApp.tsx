@@ -2,12 +2,20 @@ import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router";
-import type { Todo } from "../../types/todo";
-import { TodoInput } from "./TodoInput";
-import { TodoList } from "./TodoList";
+
+
+interface Todo {
+  id: number;
+  text: string;
+  completed: boolean;
+}
+
+
 
 export function TodoApp() {
   const navigate = useNavigate();
+
+  const [input, setInput] = useState("");
  
   const [todos, setTodos] = useState<Todo[]>(() => {
     try {
@@ -38,15 +46,16 @@ export function TodoApp() {
   }, [dark])
 
 
-const addTodo = (text: string) => { 
-  if (!text.trim()) return; // Cek teks yang dikirim dari input
-  setTodos([
-    ...todos,
-    { id: Date.now().toString(), text: text, completed: false },
-  ]);
-};
+  const addTodo = () => {
+    if (!input.trim()) return;
+    setTodos([
+      ...todos,
+      { id: Date.now(), text: input, completed: false },
+    ]);
+    setInput("");
+  };
 
-  const toggleTodo = (id: string) => {
+  const toggleTodo = (id: number) => {
     setTodos(
       todos.map((t) =>
         t.id === id ? { ...t, completed: !t.completed } : t
@@ -54,7 +63,7 @@ const addTodo = (text: string) => {
     );
   };
 
-  const removeTodo = (id: string) => {
+  const removeTodo = (id: number) => {
     setTodos(todos.filter((t) => t.id !== id));
   };
 
@@ -90,13 +99,84 @@ const addTodo = (text: string) => {
             To Do List
           </h1>
           {/* input */}
-          <TodoInput onAdd={addTodo} />
+         <form
+            onSubmit={(e) => {
+              e.preventDefault()
+              addTodo()
+            }}
+            className="flex flex-row
+            gap-2 sm:gap-3
+            bg-slate-900
+            p-3 sm:p-4
+            rounded-xl
+            shadow-lg
+            dark:bg-slate-800"
+          >
+            <input
+              className="flex-1
+              bg-slate-800
+              rounded-lg
+              text-white
+              px-3 sm:px-4
+              py-2 sm:py-3
+              text-sm sm:text-base
+              outline-none
+              focus:ring-2 focus:ring-blue-500
+              dark:bg-slate-700"
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              placeholder="Tambah todo..."
+            />
+            <button
+              type="submit"
+              className="bg-blue-600
+              hover:bg-blue-700
+              text-white
+              px-4 sm:px-5
+              rounded-lg
+              text-lg
+              dark:bg-blue-500 dark:hover:bg-blue-600"
+            >
+              +
+            </button>
+          </form>
           {/* list */}
-          <TodoList 
-          todos={todos} 
-          onToggle={toggleTodo} 
-          onRemove={removeTodo} />
-
+          <ul className="space-y-2 sm:space-y-3 mt-4 h-[55vh] overflow-y-auto pr-1 relative todo-scroll">
+            {todos.map(todo => (
+              <div
+                key={todo.id}
+                className="  flex
+                items-center
+                gap-3
+                bg-slate-800
+                p-3 sm:p-4
+                rounded-lg
+                dark:bg-slate-700"
+              >
+                <input
+                  type="checkbox"
+                  checked={todo.completed}
+                  onChange={() => toggleTodo(todo.id)}
+                  className="w-5 h-5 sm:w-6 sm:h-6 accent-blue-500"
+                />
+                <span
+                  className={`flex-1 ${
+                    todo.completed
+                      ? "line-through text-slate-400"
+                      : "text-white"
+                  }`}
+                >
+                  {todo.text}
+                </span>
+                <button
+                  onClick={() => removeTodo(todo.id)}
+                  className="text-red-400 hover:text-red-500"
+                >
+                  ✕
+                </button>
+              </div>
+            ))}
+          </ul>
           {todos.length === 0 && (
             <p className="absolute bottom-48 left-0 right-0 text-center text-slate-500 text-sm">
               Belum ada tugas ✨
