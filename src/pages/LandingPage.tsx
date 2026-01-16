@@ -1,4 +1,5 @@
 import type { Page } from "../App";
+// Remove the unused import
 
 export default function LandingPage({
   navigate,
