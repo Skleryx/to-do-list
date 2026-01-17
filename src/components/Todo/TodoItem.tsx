@@ -47,6 +47,8 @@ export function getDeadlineBadge(deadline?: string): Badge | null {
 export function TodoItem({ todo, onToggle, onRemove }: Props) {
   const [timeLeft, setTimeLeft] = useState<string>(""); 
   const badge = getDeadlineBadge(todo.deadline ?? "");
+  
+
 
 
   useEffect(() => {
@@ -80,7 +82,7 @@ export function TodoItem({ todo, onToggle, onRemove }: Props) {
   return (
     <div
       key={todo.id}
-      className="flex items-center gap-3 bg-slate-800 p-3 sm:p-4 rounded-lg dark:bg-slate-700 hover:bg-slate-700 dark:hover:bg-slate-600 transition h-16"
+      className="flex items-center gap-3 bg-slate-800 p-3 sm:p-4 rounded-lg dark:bg-slate-700 hover:bg-slate-700 dark:hover:bg-slate-600 transition h-16 "
     >
       <input
         type="checkbox"
@@ -88,19 +90,17 @@ export function TodoItem({ todo, onToggle, onRemove }: Props) {
         onChange={() => onToggle(todo.id)}
         className="w-5 h-5 sm:w-6 sm:h-6 accent-blue-500"
       />
-      <div className="flex-1 flex flex-col">
+      <div className="flex-1 flex flex-col ">
         <span
-          className={`flex-1 ${
-            todo.completed
-              ? "line-through text-slate-400"
-              : "text-white"
-          }`}
+          className={`transition-all duration-300 text-white
+    ${todo.completed ? "line-through opacity-50" : ""}`}
         >
           {todo.text}
         </span>
         {badge && (
           <span
-            className={`inline-block mt-1 text-xs px-2 py-1 rounded-full
+            className={`    inline-block mt-1 text-xs px-2 py-1 rounded-full
+                        animate-in fade-in slide-in-from-bottom-1 duration-300
               ${
                 badge.color === "red" && "bg-red-500/20 text-red-400"
               }
