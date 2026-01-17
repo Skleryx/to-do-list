@@ -45,7 +45,7 @@ const sortedTodos = useMemo(() => {
 
 
     return (
-        <ul className="space-y-2 sm:space-y-3 h-[38vh] mt-4 overflow-y-auto pr-1 relative todo-scroll">
+        <ul className="space-y-2 sm:space-y-3 h-[32vh] mt-4 overflow-y-auto pr-1 relative todo-scroll">
             {sortedTodos.map(todo => (
                 <TodoItem 
                 key={todo.id} 

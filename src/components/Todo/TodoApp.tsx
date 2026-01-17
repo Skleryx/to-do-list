@@ -148,10 +148,12 @@ const filteredTodos = todos.filter((todo) => {
           </div>
 
           {/* list */}
-          <TodoList 
-          todos={filteredTodos} 
-          onToggle={toggleTodo} 
-          onRemove={removeTodo} />
+          <div className="relative flex-1 overflow-y-auto">
+            <TodoList
+            todos={filteredTodos}
+            onToggle={toggleTodo}
+            onRemove={removeTodo} />
+          </div>
 
           {todos.length === 0 && (
             <p className="absolute bottom-48 left-0 right-0 text-center text-slate-500 text-sm">
