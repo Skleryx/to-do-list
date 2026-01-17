@@ -38,14 +38,15 @@ export function TodoApp() {
   }, [dark])
 
 
-const addTodo = (text: string) => {
+const addTodo = (text: string, deadline?: string) => {
   if (!text.trim()) return;
   setTodos([
     ...todos,
     { 
       id: Date.now().toString(), // Pastikan string agar tidak error
       text: text, 
-      completed: false 
+      completed: false,
+      deadline: deadline, 
     },
   ]);
 };
@@ -157,6 +158,7 @@ const filteredTodos = todos.filter((todo) => {
               Belum ada tugas ✨
             </p>
           )}
+          
           <button
             onClick={() => setDark(!dark)}
             className="
