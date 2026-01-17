@@ -27,12 +27,14 @@ export function getDeadlineBadge(deadline?: string): Badge | null {
   const day = 1000 * 60 * 60 * 24;
   const daysLeft = Math.ceil(diff / day);
   const hoursLeft = Math.ceil(diff / (1000 * 60 * 60));
+  const minutesLeft = Math.ceil(diff / (1000 * 60));
+  const secondsLeft = Math.ceil(diff / 1000);
 
-  if (daysLeft < 0) {
+  if (secondsLeft <= 0 && minutesLeft <= 0 && hoursLeft <= 0 && daysLeft <= 0) {
     return { color: "red", text: "Overdue" };
   }
 
-  if (hoursLeft <= 24 && hoursLeft > 0) {
+  if (hoursLeft <= 24) {
     return { color: "yellow", text: "Today" };
   }
 
